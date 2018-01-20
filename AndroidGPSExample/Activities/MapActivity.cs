@@ -90,8 +90,6 @@ namespace AndroidGPSExample.Activities
 
         private void SetCurrentPositionButton()
         {
-
-
             Button currentLocationButton = FindViewById<Button>(Resource.Id.currentLocationButton);
             currentLocationButton.Click += async (sender, e) =>
             {
@@ -125,6 +123,8 @@ namespace AndroidGPSExample.Activities
 
         private void SetStartListeningButton()
         {
+            if (_googleApiClient.IsConnected) return;
+
             Button startButton = FindViewById<Button>(Resource.Id.startButton);
             startButton.Click += async (sender, e) =>
             {
@@ -134,6 +134,8 @@ namespace AndroidGPSExample.Activities
 
         private void SetStopListeningButton()
         {
+            if(!_googleApiClient.IsConnected) return;
+
             Button stopButton = FindViewById<Button>(Resource.Id.stopButton);
             stopButton.Click += async (sender, e) =>
             {
@@ -166,6 +168,7 @@ namespace AndroidGPSExample.Activities
 
         public void OnLocationChanged(Location location)
         {
+            Console.WriteLine("Latitude: {0}, Lngitude: {1}", location.Latitude, location.Longitude);
             SendData(GetRequestParams(new LocationModel(location.Latitude, location.Longitude)));
         }
 
@@ -175,7 +178,7 @@ namespace AndroidGPSExample.Activities
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://192.168.1.8");
-                HttpResponseMessage response = await client.PostAsync("/AndroidGPSExample.API/api/values", stringContent);
+                HttpResponseMessage response = await client.PostAsync("/AndroidGPSExample.API/api/geolocation", stringContent);
             }
         }
 
