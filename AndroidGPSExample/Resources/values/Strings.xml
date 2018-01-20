@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Android GPS Example</string>
+  <string name="title">Send your current location to the cloud</string>
+</resources>
