@@ -7,11 +7,10 @@ using Android.Gms.Maps.Model;
 using Android.Locations;
 using Android.OS;
 using Android.Widget;
-using Newtonsoft.Json;
+using AndroidGPSExample.Domain;
+using AndroidGPSExample.Domain.Contracts;
 using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
+using XLabs.Ioc;
 using static Android.Gms.Common.Apis.GoogleApiClient;
 using static Android.Gms.Maps.GoogleMap;
 
@@ -30,6 +29,7 @@ namespace AndroidGPSExample.Activities
         private MapFragment _mapFragment;
         private GoogleApiClient _googleApiClient;
         private Marker _marker;
+        private IGeoLocationService _geoLocationService;
 
         public void OnMapReady(GoogleMap googleMap)
         {
@@ -48,9 +48,10 @@ namespace AndroidGPSExample.Activities
             SetCurrentPositionButton();
             SetStartListeningButton();
             SetStopListeningButton();
+            _geoLocationService = Resolver.Resolve<IGeoLocationService>();
 
             _googleApiClient = new Builder(this, this, this)
-                    .AddApi(LocationServices.API).Build();
+                .AddApi(LocationServices.API).Build();
 
         }
 
@@ -76,7 +77,7 @@ namespace AndroidGPSExample.Activities
             if (_mapFragment == null)
             {
                 GoogleMapOptions mapOptions = new GoogleMapOptions()
-                    .InvokeMapType(GoogleMap.MapTypeSatellite)
+                    .InvokeMapType(MapTypeSatellite)
                     .InvokeZoomControlsEnabled(false)
                     .InvokeCompassEnabled(true);
 
@@ -123,22 +124,22 @@ namespace AndroidGPSExample.Activities
 
         private void SetStartListeningButton()
         {
-            if (_googleApiClient.IsConnected) return;
-
             Button startButton = FindViewById<Button>(Resource.Id.startButton);
-            startButton.Click += async (sender, e) =>
+            startButton.Click += (sender, e) =>
             {
+                if (_googleApiClient.IsConnected) return;
+
                 _googleApiClient.Connect();
             };
         }
 
         private void SetStopListeningButton()
         {
-            if(!_googleApiClient.IsConnected) return;
-
             Button stopButton = FindViewById<Button>(Resource.Id.stopButton);
             stopButton.Click += async (sender, e) =>
             {
+                if (!_googleApiClient.IsConnected) return;
+
                 await LocationServices.FusedLocationApi.RemoveLocationUpdatesAsync(_googleApiClient, this);
                 _googleApiClient.Disconnect();
             };
@@ -169,22 +170,8 @@ namespace AndroidGPSExample.Activities
         public void OnLocationChanged(Location location)
         {
             Console.WriteLine("Latitude: {0}, Lngitude: {1}", location.Latitude, location.Longitude);
-            SendData(GetRequestParams(new LocationModel(location.Latitude, location.Longitude)));
+            _geoLocationService.SendGeoLocation(new GeoLocation(location.Latitude, location.Longitude));
         }
-
-        private async void SendData(StringContent stringContent)
-        {
-
-            using (HttpClient client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://192.168.1.8");
-                HttpResponseMessage response = await client.PostAsync("/AndroidGPSExample.API/api/geolocation", stringContent);
-            }
-        }
-
-        private StringContent GetRequestParams<T>(T request) =>
-            new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-
 
         public void OnConnectionSuspended(int cause)
         {
@@ -194,17 +181,6 @@ namespace AndroidGPSExample.Activities
         public void OnConnectionFailed(ConnectionResult result)
         {
             //TODO: On Fail
-        }
-
-        public class LocationModel {
-
-            public double Latitude { get; set; }
-            public double Longitude { get; set; }
-
-            public LocationModel(double latitude, double longitude) {
-                Latitude = latitude;
-                Longitude = longitude;
-            }
         }
 
     }

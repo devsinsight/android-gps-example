@@ -2,12 +2,12 @@
 using Android.OS;
 using Android.Widget;
 using AndroidGPSExample.Activities;
+using AndroidGPSExample.Service;
 using Autofac;
 using System;
 using XLabs.Ioc;
 using XLabs.Ioc.Autofac;
 using XLabs.Platform.Device;
-using XLabs.Platform.Services.Geolocation;
 
 namespace AndroidGPSExample
 {
@@ -29,7 +29,7 @@ namespace AndroidGPSExample
         public void SetContainer() {
             var builder = new ContainerBuilder();
             builder.Register(c => AndroidDevice.CurrentDevice).As<IDevice>();
-            builder.RegisterType<Geolocator>().AsSelf();
+            builder.RegisterType<GeoLocationService>().AsImplementedInterfaces();
 
             Resolver.SetResolver(new AutofacResolver(builder.Build()));
         }

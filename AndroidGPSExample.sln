@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidGPSExample", "AndroidGPSExample\AndroidGPSExample.csproj", "{09C23F93-F0CD-4432-9EC4-15259077D02C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidGPSExample.Infrastructure", "AndroidGPSExample.Infrastructure\AndroidGPSExample.Infrastructure.csproj", "{87087191-3E6D-435B-81A5-F6222D4A8AA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidGPSExample.Services", "AndroidGPSExample.Service\AndroidGPSExample.Services.csproj", "{200BB0ED-21E3-4110-938B-C9763AA2235A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidGPSExample.Service", "AndroidGPSExample.Service\AndroidGPSExample.Service.csproj", "{200BB0ED-21E3-4110-938B-C9763AA2235A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidGPSExample.Domain", "AndroidGPSExample.Domain\AndroidGPSExample.Domain.csproj", "{6C845CDD-2421-4B3D-AE11-006B56B1A8CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,14 +21,14 @@ Global
 		{09C23F93-F0CD-4432-9EC4-15259077D02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09C23F93-F0CD-4432-9EC4-15259077D02C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{09C23F93-F0CD-4432-9EC4-15259077D02C}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{87087191-3E6D-435B-81A5-F6222D4A8AA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87087191-3E6D-435B-81A5-F6222D4A8AA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87087191-3E6D-435B-81A5-F6222D4A8AA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87087191-3E6D-435B-81A5-F6222D4A8AA3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{200BB0ED-21E3-4110-938B-C9763AA2235A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{200BB0ED-21E3-4110-938B-C9763AA2235A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{200BB0ED-21E3-4110-938B-C9763AA2235A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{200BB0ED-21E3-4110-938B-C9763AA2235A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C845CDD-2421-4B3D-AE11-006B56B1A8CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C845CDD-2421-4B3D-AE11-006B56B1A8CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C845CDD-2421-4B3D-AE11-006B56B1A8CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C845CDD-2421-4B3D-AE11-006B56B1A8CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -219,13 +219,13 @@
     <Folder Include="Resources\mipmap-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AndroidGPSExample.Infrastructure\AndroidGPSExample.Infrastructure.csproj">
-      <Project>{87087191-3e6d-435b-81a5-f6222d4a8aa3}</Project>
-      <Name>AndroidGPSExample.Infrastructure</Name>
+    <ProjectReference Include="..\AndroidGPSExample.Domain\AndroidGPSExample.Domain.csproj">
+      <Project>{6C845CDD-2421-4B3D-AE11-006B56B1A8CB}</Project>
+      <Name>AndroidGPSExample.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AndroidGPSExample.Service\AndroidGPSExample.Service.csproj">
+    <ProjectReference Include="..\AndroidGPSExample.Service\AndroidGPSExample.Services.csproj">
       <Project>{200bb0ed-21e3-4110-938b-c9763aa2235a}</Project>
-      <Name>AndroidGPSExample.Service</Name>
+      <Name>AndroidGPSExample.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
